@@ -1151,7 +1151,7 @@ we can help you.</h2>				</div>
 		<div class="elementor-element elementor-element-b22dd36 e-con-full e-flex e-con e-child" data-id="b22dd36" data-element_type="container" data-e-type="container">
 				<div class="elementor-element elementor-element-04139b7 elementor-button-align-stretch elementor-widget elementor-widget-global elementor-global-1892 elementor-widget-form" data-id="04139b7" data-element_type="widget" data-e-type="widget" data-settings="{&quot;step_next_label&quot;:&quot;Next&quot;,&quot;step_previous_label&quot;:&quot;Previous&quot;,&quot;button_width&quot;:&quot;100&quot;,&quot;step_type&quot;:&quot;number_text&quot;,&quot;step_icon_shape&quot;:&quot;circle&quot;}" data-widget_type="form.default">
 				<div class="elementor-widget-container">
-							<form class="elementor-form" method="post" name="Contact Form" aria-label="Contact Form" data-netlify="true" netlify-honeypot="bot-field">
+							<form class="elementor-form" method="post" name="Contact Form" aria-label="Contact Form" data-netlify="true" data-netlify-recaptcha="true" netlify-honeypot="bot-field">
 			<input type="hidden" name="post_id" value="1810">
 			<input type="hidden" name="form_id" value="04139b7">
 			<input type="hidden" name="referer_title" value="4XD IT Solutions - 4XD IT Solutions">
@@ -1176,6 +1176,7 @@ we can help you.</h2>				</div>
 								<div class="elementor-field-type-hidden elementor-field-group elementor-column elementor-field-group-field_bd24b1b elementor-col-100">
 													<input size="1" type="hidden" name="form_fields[field_bd24b1b]" id="form-field-field_bd24b1b" class="elementor-field elementor-size-sm  elementor-field-textual" value="4XD">
 											</div>
+								<div data-netlify-recaptcha="true"></div>
 								<div class="elementor-field-group elementor-column elementor-field-type-submit elementor-col-100 e-form__buttons">
 					<button class="elementor-button elementor-size-sm" type="submit">
 						<span class="elementor-button-content-wrapper">
@@ -1455,5 +1456,26 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 </script>
 <!-- Cloudflare script removed -->
 <!--	<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9d4861935b85bc57',t:'MTc3MjIwMjYzOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><!-- Cloudflare iframe removed -->
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+	const form = document.querySelector('.elementor-form');
+	if (form) {
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			const button = form.querySelector('button[type="submit"]');
+			const buttonText = button.querySelector('.elementor-button-text');
+			const originalText = buttonText.textContent;
+			buttonText.textContent = 'Form submitted successfully!';
+			buttonText.style.color = '#2c541d';
+			form.reset();
+			setTimeout(function() {
+				buttonText.textContent = originalText;
+				buttonText.style.color = '';
+			}, 3000);
+		});
+	}
+});
+</script>
 
 </body></html>
