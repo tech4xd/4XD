@@ -578,13 +578,32 @@ var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/4xditsolutions.com\/wp-ad
 						const button = form.querySelector('button[type="submit"]');
 						const buttonText = button.querySelector('.elementor-button-text');
 						const originalText = buttonText.textContent;
-						buttonText.textContent = 'Form submitted successfully!';
-						buttonText.style.color = '#2c541d';
-						form.reset();
-						setTimeout(function() {
-							buttonText.textContent = originalText;
-							buttonText.style.color = '';
-						}, 3000);
+						button.disabled = true;
+						buttonText.textContent = 'Sending...';
+						const formData = new FormData(form);
+						formData.append('form-name', form.getAttribute('name'));
+						fetch('/', {
+							method: 'POST',
+							headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+							body: new URLSearchParams(formData).toString()
+						})
+						.then(function() {
+							buttonText.textContent = 'Form submitted successfully!';
+							buttonText.style.color = '#2c541d';
+							form.reset();
+							setTimeout(function() {
+								buttonText.textContent = originalText;
+								buttonText.style.color = '';
+								button.disabled = false;
+							}, 3000);
+						})
+						.catch(function() {
+							buttonText.textContent = 'Error submitting. Please try again.';
+							button.disabled = false;
+							setTimeout(function() {
+								buttonText.textContent = originalText;
+							}, 3000);
+						});
 					});
 				}
 			});
